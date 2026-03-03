@@ -9,6 +9,7 @@ import {
   Shield,
   LogOut,
   ChevronDown,
+  Folder,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -32,6 +33,7 @@ interface DashboardShellProps {
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/profile", label: "Profile", icon: UserCircle },
+  { href: "/admin/projects", label: "Projects", icon: Folder, testId: "project-menu" },
 ];
 
 export function DashboardShell({ user, profile, children }: DashboardShellProps) {
@@ -58,6 +60,7 @@ export function DashboardShell({ user, profile, children }: DashboardShellProps)
                 <Link
                   key={item.href}
                   href={item.href}
+                  data-testid={item.testId}
                   className={`flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                     isActive
                       ? "bg-primary/10 text-primary"
