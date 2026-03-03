@@ -3,6 +3,7 @@ import { test, expect } from "@playwright/test";
 test.describe("Admin Project Management", () => {
   test("Access Project Page", async ({ page }) => {
     await page.goto("/admin");
+    await expect(page.getByTestId("project-menu")).toBeVisible();
     await page.getByTestId("project-menu").click();
     await expect(page).toHaveURL("/admin/projects");
   });
@@ -14,6 +15,7 @@ test.describe("Admin Project Management", () => {
 
   test("Setup New Project", async ({ page }) => {
     await page.goto("/admin/projects");
+    await expect(page.getByTestId("setup-new-project-btn")).toBeVisible();
     await page.getByTestId("setup-new-project-btn").click();
     await page.getByTestId("project-name-input").fill("Project Alpha");
     await page.getByTestId("start-date-input").click();
