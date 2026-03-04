@@ -59,3 +59,19 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+model Project {
+  id        String    @id @default(cuid())
+  name      String
+  startDate DateTime
+  endDate   DateTime
+  assignees Assignee[]
+}
+
+model Assignee {
+  id        String  @id @default(cuid())
+  email     String
+  name      String
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}

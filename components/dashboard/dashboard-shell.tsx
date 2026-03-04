@@ -32,6 +32,7 @@ interface DashboardShellProps {
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/profile", label: "Profile", icon: UserCircle },
+  { href: "/admin/projects", label: "Projects", icon: Shield }, // Added Projects menu item
 ];
 
 export function DashboardShell({ user, profile, children }: DashboardShellProps) {
