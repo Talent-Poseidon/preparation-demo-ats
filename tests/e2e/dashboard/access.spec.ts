@@ -37,4 +37,26 @@ test.describe('Dashboard Access Control', () => {
     await expect(page).toHaveURL(/\/dashboard/);
     console.log('[Access Test] Authenticated admin successfully accessed dashboard.');
   });
+
+  test('should display Projects menu item for admin', async ({ page }) => {
+    // Navigate to login page (guest context, so no redirect)
+    console.log('[Access Test] Navigating to /auth/login...');
+    await page.goto('/auth/login');
+    await expect(page).toHaveURL(/.*\/auth\/login/);
+
+    // Perform manual login
+    console.log('[Access Test] Filling admin credentials...');
+    await page.fill('input[name="email"]', 'admin@example.com');
+    await page.fill('input[name="password"]', 'password123');
+    await page.locator('form').first().locator('button[type="submit"]').click();
+
+    // Wait for redirect to dashboard
+    console.log('[Access Test] Waiting for redirect to /dashboard...');
+    await page.waitForURL(/\/dashboard/, { timeout: 15000 });
+
+    // Verify Projects menu item
+    console.log('[Access Test] Checking for Projects menu item...');
+    await expect(page.getByText('Projects')).toBeVisible();
+    console.log('[Access Test] Projects menu item is visible.');
+  });
 });
